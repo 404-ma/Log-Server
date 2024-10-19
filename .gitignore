@@ -1,0 +1,28 @@
+# Virtual environment
+venv/
+env/
+.env/
+
+log.log
+
+# Python cache files
+__pycache__/
+
+# Python virtual environment directories
+bin/
+include/
+lib/
+
+# Local configuration files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Build and distribution files
+build/
+dist/
+*.egg-info/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
