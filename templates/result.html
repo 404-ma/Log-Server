@@ -13,19 +13,57 @@
             white-space: pre-wrap;
             word-wrap: break-word;
     }
-    a {
+    a, button {
       text-decoration: none;
-      background: gray;
-      padding: 3px;
+      font-size: 13px;
+      background: lightgray;
+      padding: 3px 10px;
       border: 1px solid black;
       color: black;
       border-radius: 3px;
+      cursor: pointer;
+    }
+    a:hover,button:hover {
+      opacity: 70%;
+    }
+    h1 {
+      font-weight: 500;
+    }
+    .res-container {
+      background: #fafafa;
+      padding: 2px 30px;
+      border-radius: 30px;
+      border: 1px solid #d4d4d4;
+      margin: 30px 10px;
+      padding-bottom: 30px !important;
+    }
+
+    .res-container > code {
+      font-size: 15px;
     }
     </style>
 </head>
 <body>
-    <h1>Decoded</h1>
-    <code>{{ result }}</code>
+    <h1>Log Dump</h1>
+    <code>Selected a file but it's not showing up? Try setting dump mode to customFile and re-run the LogView OpMode.</code>
+    <br /> <br />
     <a href="/">Upload another file</a>
+  <a href="/browse" target="_blank">Browse Files</a>
+    <button id="clear">Clear Logs</button>
+    <br /> <br />
+    <code id="refresh"></code>
+
+    <div class="res-container">
+    <code>{{ "\n\n"+result.strip() if result != "" else "\n\nNo logs found\n\n" }}</code>
+    </div>
+
+
+    <script>
+    document.getElementById("clear").addEventListener('click', () => {
+      fetch("/clear");
+      // window.location.reload();
+      document.getElementById("refresh").textContent = "Refresh to view log changes"
+    })
+    </script>
 </body>
 </html>
