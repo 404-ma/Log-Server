@@ -11,7 +11,7 @@ pyvenv.cfg
 __pycache__/
 
 # Python virtual environment directories
-bin/
+# bin/
 include/
 lib/
 
