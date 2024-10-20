@@ -8,9 +8,9 @@ The Log-Viewer server generates an API and a web interface which creates a bridg
 **IMPORTANT NOTICE** - To abide by FTC rules, Log-Server does NOT support live read nor direct FS write access to internal SD memory. This tool can only be used post-match or during testing, and de-serializes and displays completed log files. 
 
 
-![alt text](static/image.png)
+![alt text](readme-images/image.png)
 
-![alt text](static/image2.png)
+![alt text](readme-images/image2.png)
 
 # How to run
 

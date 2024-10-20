@@ -4,75 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Browser</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        .file-viewer {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .file {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background-color: white;
-            padding: 15px;
-            width: 150px;
-            height: 100px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        code {
-          font-size: 18px;
-        }
-
-        .file:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .file-icon {
-            font-size: 50px;
-            color: #4a90e2;
-            margin-bottom: 10px;
-        }
-
-        .file-name {
-            font-size: 20px;
-            font-weight: 500;
-            text-align: center;
-            word-wrap: break-word;
-        }
-        h1 {
-            font-weight: 500;
-        }
-        input {
-            padding: 7px 12px;
-            width: 100%;
-            max-width: 230px;
-            margin-bottom: 50px;
-            border-radius: 5px;
-            outline: none;
-            border: 1px solid #dfdfdf;
-        }
-        button { 
-            padding: 5px 12px;
-            cursor: pointer;
-        }
-    </style>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/browse.css') }}">
 </head>
 <body>
 
+  <a href="/view" target="_blank">View Log Dumps (After Re-Running LogView)</a>
+        <br /> <br/>
     <code id="ogSelected">Selected File: {{ fileName if fileName != "" else "No File Selected" }}</code>
     <code id="newSelected"></code>
 <h1>File Viewer</h1>
@@ -83,78 +20,12 @@
         <p><span id="fileCount">100</span> Files Found</p>
 <div class="file-viewer" id="fileViewer"></div>
 
-<script>
-    const fileNames = {{ files | tojson }};
+    <script>
+        const fileNames = {{ files | tojson }};
+        window.fileNames = fileNames;
+    </script>
 
-    document.getElementById('search').addEventListener('click', () => {
-        const input = document.getElementById('input');
-        console.log(input.value);
-        filterFiles(input.value);
-    })
-
-    document.getElementById('clear').addEventListener('click', () => {
-        document.getElementById('input').value = '';
-        filterFiles("");
-    })
-
-    function loadFiles(files) {
-        const fileViewer = document.getElementById('fileViewer');
-
-        document.getElementById('fileCount').textContent = files.length;
-
-        files.forEach(file => {
-            const fileElement = document.createElement('div');
-            fileElement.classList.add('file');
-            
-            const fileIcon = document.createElement('div');
-            fileIcon.classList.add('file-icon');
-            fileIcon.innerHTML = '📄';
-            fileElement.appendChild(fileIcon);
-            
-            const fileName = document.createElement('div');
-            fileName.classList.add('file-name');
-            fileName.textContent = file;
-            fileElement.appendChild(fileName);
-
-            fileElement.addEventListener('click', () => {
-
-              const data = { fileName : file };
-
-                fetch('/choosefile', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(data),
-                })
-                .then(response => response.json())
-                .then(data => {
-                  // window.location.reload();
-                  document.getElementById('ogSelected').textContent = '';
-                        document.getElementById('newSelected').textContent = `Selected File: ${file}`;
-                })
-                .catch((error) => {
-                    console.error('Error:', error);
-              alert("an error occured.");
-                });
-                    });
-
-                    fileViewer.appendChild(fileElement);
-                });
-              }
-
-    function filterFiles(searchTerm) {
-        const files = Array.from(fileNames).filter(a => a.trim().includes(searchTerm.trim()));
-        console.log(files);
-
-        const fileViewer = document.getElementById('fileViewer');
-        fileViewer.innerHTML = "";
-
-        loadFiles(files);
-    }
-
-    loadFiles(fileNames);
-</script>
+        <script src="{{url_for('static', filename='browse.js')}}"></script>
 
     <p>{{ "No Files Found. Re-run browse mode in the LogViewer OpMode to add files" if files == [] }}</p>
 

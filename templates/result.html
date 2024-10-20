@@ -4,44 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log Dump Viewer</title>
-    <style>
-    body {
-      font-family: sans-serif;
-      padding: 30px;
-    }
-    code {
-            white-space: pre-wrap;
-            word-wrap: break-word;
-    }
-    a, button {
-      text-decoration: none;
-      font-size: 13px;
-      background: lightgray;
-      padding: 3px 10px;
-      border: 1px solid black;
-      color: black;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-    a:hover,button:hover {
-      opacity: 70%;
-    }
-    h1 {
-      font-weight: 500;
-    }
-    .res-container {
-      background: #fafafa;
-      padding: 2px 30px;
-      border-radius: 30px;
-      border: 1px solid #d4d4d4;
-      margin: 30px 10px;
-      padding-bottom: 30px !important;
-    }
-
-    .res-container > code {
-      font-size: 15px;
-    }
-    </style>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/result.css') }}">
 </head>
 <body>
     <h1>Log Dump</h1>
@@ -56,14 +19,6 @@
     <div class="res-container">
     <code>{{ "\n\n"+result.strip() if result != "" else "\n\nNo logs found\n\n" }}</code>
     </div>
-
-
-    <script>
-    document.getElementById("clear").addEventListener('click', () => {
-      fetch("/clear");
-      // window.location.reload();
-      document.getElementById("refresh").textContent = "Refresh to view log changes"
-    })
-    </script>
+        <script src="{{url_for('static', filename='result.js')}}"></script>
 </body>
 </html>
