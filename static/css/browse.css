@@ -2,13 +2,11 @@
       font-family: Arial, sans-serif;
       margin: 20px;
   }
-
   .file-viewer {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
   }
-
   .file {
       display: flex;
       flex-direction: column;
@@ -24,22 +22,18 @@
       cursor: pointer;
       transition: transform 0.2s, box-shadow 0.2s;
   }
-
   code {
     font-size: 18px;
   }
-
   .file:hover {
       transform: scale(1.05);
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
-
   .file-icon {
       font-size: 50px;
       color: #4a90e2;
       margin-bottom: 10px;
   }
-
   .file-name {
       font-size: 20px;
       font-weight: 500;

@@ -1,7 +1,12 @@
 import re
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
+import os
+
+# imports from the compiled c module
 from read import output
+
+os.environ["FLASK_ENV"] = "production"
 
 app = Flask(__name__)
 CORS(app)
@@ -102,4 +107,4 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=1000, debug=True)
+    app.run(host="0.0.0.0", port=1000, debug=False)
