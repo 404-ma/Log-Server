@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Viewer</title>
+    <title>File Browser</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,20 +53,54 @@
             text-align: center;
             word-wrap: break-word;
         }
+        h1 {
+            font-weight: 500;
+        }
+        input {
+            padding: 7px 12px;
+            width: 100%;
+            max-width: 230px;
+            margin-bottom: 50px;
+            border-radius: 5px;
+            outline: none;
+            border: 1px solid #dfdfdf;
+        }
+        button { 
+            padding: 5px 12px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
 
-    <code>Selected File: {{ fileName if fileName != "" else "No File Selected" }}</code>
+    <code id="ogSelected">Selected File: {{ fileName if fileName != "" else "No File Selected" }}</code>
+    <code id="newSelected"></code>
 <h1>File Viewer</h1>
+        <input type="text" id="input" placeholder="Enter File Name Here" />
+        <button id="search">Search</button>
+        <button id="clear">Clear</button>
 
+        <p><span id="fileCount">100</span> Files Found</p>
 <div class="file-viewer" id="fileViewer"></div>
 
 <script>
     const fileNames = {{ files | tojson }};
 
+    document.getElementById('search').addEventListener('click', () => {
+        const input = document.getElementById('input');
+        console.log(input.value);
+        filterFiles(input.value);
+    })
+
+    document.getElementById('clear').addEventListener('click', () => {
+        document.getElementById('input').value = '';
+        filterFiles("");
+    })
+
     function loadFiles(files) {
         const fileViewer = document.getElementById('fileViewer');
+
+        document.getElementById('fileCount').textContent = files.length;
 
         files.forEach(file => {
             const fileElement = document.createElement('div');
@@ -74,7 +108,7 @@
             
             const fileIcon = document.createElement('div');
             fileIcon.classList.add('file-icon');
-            fileIcon.innerHTML = '📄'; // Placeholder icon for files
+            fileIcon.innerHTML = '📄';
             fileElement.appendChild(fileIcon);
             
             const fileName = document.createElement('div');
@@ -95,7 +129,9 @@
                 })
                 .then(response => response.json())
                 .then(data => {
-                  window.location.reload();
+                  // window.location.reload();
+                  document.getElementById('ogSelected').textContent = '';
+                        document.getElementById('newSelected').textContent = `Selected File: ${file}`;
                 })
                 .catch((error) => {
                     console.error('Error:', error);
@@ -106,6 +142,16 @@
                     fileViewer.appendChild(fileElement);
                 });
               }
+
+    function filterFiles(searchTerm) {
+        const files = Array.from(fileNames).filter(a => a.trim().includes(searchTerm.trim()));
+        console.log(files);
+
+        const fileViewer = document.getElementById('fileViewer');
+        fileViewer.innerHTML = "";
+
+        loadFiles(files);
+    }
 
     loadFiles(fileNames);
 </script>

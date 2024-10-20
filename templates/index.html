@@ -3,24 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload</title>
+    <title>Log-View Home</title>
+    <style>
+    body {
+      font-family: sans-serif;
+    }
+    h1 {
+      font-weight: 500;
+    }
+    section {
+      width: 100%;
+      margin-left: auto;
+      margin-right: auto;
+      /* background: red; */
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    section > h1 {
+      font-size: 40px;
+    }
+    section > p {
+      text-align: center;
+      opacity: 50%;
+      font-size: 17px;
+    }
+    a {
+      text-decoration: none;
+      font-size: 13px;
+      background: lightgray;
+      padding: 3px 10px;
+      border: 1px solid black;
+      color: black;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+    a:hover {
+      opacity: 70%;
+    }
+    section > div {
+      margin-top: 20px;
+    }
+    hr {
+      background: #d4d4d4;
+      height :1px;
+      width: 100%;
+      border: none;
+      margin-top: 40px;
+    }
+    </style>
 </head>
 <body>
+    
+    <section>
+      <h1>FlightRecorder Log-Viewer</h1>
+      <p>Welcome to the FlightRecorder Log-Viewer. This server is used to view and analyze FlightRecorder log dumps, as well as upload and analyze custom log dump files.</p>
+      <div>
+        <a href="/view">View Log Dumps</a>
+        <a href="/browse">Browse Log Dump Files</a>
+      </div>
+      <hr />
     <h1>Upload a File</h1>
-
-    {% with messages = get_flashed_messages() %}
-      {% if messages %}
-        <ul>
-          {% for message in messages %}
-            <li>{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-
     <form action="/upload" method="post" enctype="multipart/form-data">
         <input type="file" name="file" required>
         <input type="submit" value="Upload">
     </form>
+    </section>
+
 </body>
 </html>
