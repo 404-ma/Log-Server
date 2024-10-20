@@ -29,15 +29,23 @@ source ./venv/bin/activate
 ```
 
 ```
-pip install -r requirements.txt
+./bin/setup
 ```
 
 ```
-python3 main.py
+./bin/execute
 ```
+
+The IP and port that the server is running on will be displayed.
 
 On Non-Unix Machine:
 
-modify the cmd's above to be compliant for non-unix
+modify the cmd's above to be compliant for non-unix. You cannot use the executables in `./bin` because they are for unix only. Instead, run
+
+```
+pip3 install -r requirements.txt
+```
+
+And then compile the cython and run main.py
 
 **This works best when using the FTC dashboard to modify parameters and execute LogView**
