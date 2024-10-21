@@ -25,8 +25,8 @@ class EnumSchema:
     constants: T.List[str]
 
 
-def read_file(f):
-    def read(n):
+def read_file(f: object) -> tuple[dict, dict[object, list]]:
+    def read(n: object) -> object:
         assert n > 0
         # assume this reads exactly n bytes or we reach EOF
         buf = f.read(n)
@@ -72,9 +72,9 @@ def read_file(f):
         else:
             raise ValueError(f"Unknown schema type: {schema_type}")
 
-    def read_msg(schema):
+    def read_msg(schema) -> (object | str | dict):
         if isinstance(schema, StructSchema):
-            msg = {}
+            msg: dict = {}
             for name, field_schema in schema.fields.items():
                 msg[name] = read_msg(field_schema)
             return msg
@@ -101,8 +101,8 @@ def read_file(f):
     assert magic == b"RR"
     assert version == 0
 
-    channels = []
-    schemas = {}
+    channels: list = []
+    schemas: dict = {}
     messages = defaultdict(list)
 
     while True:
