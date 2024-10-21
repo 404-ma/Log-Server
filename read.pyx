@@ -127,8 +127,8 @@ def read_file(f):
     return schemas, dict(messages)
 
 
-def output(f):
-    out = ""
+def output(f) -> str:
+    str out = ""
     schemas, messages = read_file(f)
     for ch, schema in schemas.items():
         out += f"\n Channel: {ch}  ({len(messages[ch])} messages)\n \n"
