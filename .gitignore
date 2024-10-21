@@ -8,6 +8,7 @@ log.log
 # built c modules
 read.c
 *.so
+server.c
 
 pyvenv.cfg
 

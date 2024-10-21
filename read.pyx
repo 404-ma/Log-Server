@@ -128,7 +128,7 @@ def read_file(f):
 
 
 def output(f) -> str:
-    str out = ""
+    out = ""
     schemas, messages = read_file(f)
     for ch, schema in schemas.items():
         out += f"\n Channel: {ch}  ({len(messages[ch])} messages)\n \n"
