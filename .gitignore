@@ -5,6 +5,10 @@ env/
 
 log.log
 
+# built c modules
+./read.c
+./read.cpython-312-darwin.so
+
 pyvenv.cfg
 
 # Python cache files
