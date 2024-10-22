@@ -81,6 +81,8 @@ def updateFiles():
 
     global_state["files"] = files
 
+    print(global_state["files"])
+
     return "success"
 
 
