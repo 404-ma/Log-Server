@@ -1,3 +1,4 @@
 Flask
 Cython
+setuptools
 Flask-CORS
