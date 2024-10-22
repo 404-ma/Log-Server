@@ -103,4 +103,7 @@ def upload_file():
     global global_state
     global_state["out"] = global_state["out"] + result
 
-    return render_template("result.html", result=global_state["out"])
+    # return render_template("result.html", result=global_state["out"])
+    return render_template("redir.html")
+
+

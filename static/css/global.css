@@ -1,0 +1,22 @@
+a, button, #uploadBtn {
+    background: #2563eb !important;
+    color: white !important;
+    border: none !important;
+    font-weight: semibold !important;
+    border-radius: 3px !important;
+    padding: 8px 17px !important;
+    cursor: pointer !important;
+}
+
+p {
+    opacity: 50% !important;
+}
+
+a:hover,button:hover, #uploadBtn:hover {
+    opacity: 100% !important;
+    background: #1d4ed8 !important;
+}
+a:active,button:active, #uploadBtn:active{
+    opacity: 100% !important;
+    background: #1e40af !important;
+}
